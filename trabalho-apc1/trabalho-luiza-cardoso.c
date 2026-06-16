@@ -80,8 +80,7 @@ int main() {
 
         if (qtd_atual == 0) {
             printf("Nenhum filme cadastrado!\n");
-        }
-
+        } else {
         printf("Digite o número do filme que deseja editar (1 a %d):\n", qtd_atual);
         scanf("%d", &num_user);
         while(getchar() != '\n');
@@ -118,11 +117,37 @@ int main() {
                 printf("Título: %s\n", filmes[num_real].titulo);
                 printf("Ano: %d\n", filmes[num_real].ano);
                 printf("Estrelas: %d\n\n", filmes[num_real].estrelas);
-
+                }
             }
-        } else if (opcao == 4){
+        } else if (opcao == 4) {
+
+            // ================== BUSCAR FILME =========================
+
+            int num_user, num_real;
+
+            if (qtd_atual == 0) {
+                printf("Nenhum filme cadastrado!\n");
+            } else {
+                printf("Digite o número do filme que deseja buscar: ");
+                scanf("%d", &num_user);
+                while(getchar() != '\n');
+                printf("\n");
+
+                num_real = num_user - 1; // converte para o indice real do filme dentro do array
+
+                if (num_real < 0 || num_real >= qtd_atual) {
+                    printf("Não existe um filme com o número %d\n", num_user);
+                } else {
+                    printf("Filme %d\n", num_user);
+                    printf("Título: %s\n", filmes[num_real].titulo);
+                    printf("Ano: %d\n", filmes[num_real].ano);
+                    printf("Estrelas: %d\n\n", filmes[num_real].estrelas);
+                }
+            }
+        } else if (opcao == 5){
 
             // ================== DELETAR FILME =======================
+
             int num_user, num_real;
 
             if (qtd_atual == 0) {
@@ -135,16 +160,28 @@ int main() {
 
             num_real = num_user - 1; // converte para o indice real do filme dentro do array
 
-            for (int i = num_real; i < qtd_atual - 1; i++) {
+            if (num_real < 0 || num_real >= qtd_atual) {
+                printf("Opção inválida! Tente de novo.");
+
+            } else {
+               for (int i = num_real; i < qtd_atual - 1; i++) {
                 filmes[i] = filmes[i+1];
+                } 
             }
 
             qtd_atual--; // decrementa quantidade de filmes
+            printf("\n");
             printf("Filme %d removido com sucesso!\n", num_user);
 
+        } else if (opcao < 1 || opcao > 6) {
+            printf("Opção inválida! Tente de novo\n");
         }
     // ADD OPCAO INVALIDA
     } while (opcao !=6);
+
+    if (opcao == 6) {
+        printf("Encerrando. Até a próxima!\n");
+    }
     
 
     return 0;
