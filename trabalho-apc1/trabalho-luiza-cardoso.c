@@ -40,14 +40,30 @@ int main() {
             scanf("%50[^\n]s", filmes[qtd_atual].titulo);
             while(getchar() != '\n');
 
-            puts("Ano:");
-            scanf("%d", &filmes[qtd_atual].ano);
-            while(getchar() != '\n');
-
-            puts("Estrelas (1 a 5):"); //ADD numero <1 ou >5 invalido
-            scanf("%d", &filmes[qtd_atual].estrelas);
-            while(getchar() != '\n');
-            printf("\n");
+            while (1) { 
+                puts("Ano:");               
+                if (scanf("%d", &filmes[qtd_atual].ano) != 1) {
+                    printf("Erro: Número inválido. Tente de novo.\n\n");
+                    while(getchar() != '\n');
+                    continue;
+                }
+                if (filmes[qtd_atual].ano < 0) {
+                    printf("Erro: Insira um ano válido.\n\n");
+                    continue;
+                } break;
+            }
+            
+            while (1) {
+                puts("Estrelas (1 - 5):"); 
+                scanf("%d", &filmes[qtd_atual].estrelas);
+                
+                if (filmes[qtd_atual].estrelas < 1 || filmes[qtd_atual].estrelas > 5) {
+                    printf("Erro: Insira um valor entre 1 e 5\n\n");
+                    while(getchar() != '\n');
+                    continue;
+                } break;
+                printf("\n");
+            }
 
             qtd_atual++;
             printf("Filme cadastrado com sucesso!\n");
@@ -77,9 +93,14 @@ int main() {
         if (qtd_atual == 0) {
             printf("Nenhum filme cadastrado!\n");
         } else {
-        printf("Digite o número do filme que deseja editar (1 a %d):\n", qtd_atual);
-        scanf("%d", &num_user);
-        while(getchar() != '\n');
+            while (1) {
+                printf("Digite o número do filme que deseja editar (1 a %d):\n", qtd_atual);
+                if (scanf("%d", &num_user) != 1) {
+                    printf("Erro: Insira um número válido.\n\n");
+                    while(getchar() != '\n');
+                    continue;
+                } break;
+            }
 
         num_real = num_user - 1; // converte para o indice real do filme dentro do array
 
@@ -96,13 +117,28 @@ int main() {
                 scanf("%50[^\n]s", &titulo_novo);
                 while(getchar() != '\n');
 
-                puts("Ano:");
-                scanf("%d", &ano_novo);
-                while(getchar() != '\n');
+                while (1) {
+                    puts("Ano:");
+                    if (scanf("%d", &ano_novo) != 1) {
+                        printf("Erro: Insira um número válido.\n\n");
+                        while(getchar() != '\n');
+                        continue;
+                        }
+                    if (ano_novo < 0) {
+                        printf("Erro: Insira um ano válido.\n\n");
+                        continue;
+                    } break;
+                } 
 
-                puts("Estrelas (1 a 5):");
-                scanf("%d", &estrelas_novo);
-                while(getchar() != '\n');
+                while (1) {
+                    puts("Estrelas (1 - 5):");
+                    scanf("%d", &estrelas_novo);
+                    if (estrelas_novo < 1 || estrelas_novo > 5) {
+                        printf("Erro: Insira um valor de 1 a 5.\n\n");
+                        while(getchar() != '\n');
+                        continue;
+                    } break;
+                }
 
                 strcpy(filmes[num_real].titulo, titulo_novo);
                 filmes[num_real].ano = ano_novo;
@@ -124,10 +160,14 @@ int main() {
             if (qtd_atual == 0) {
                 printf("Nenhum filme cadastrado!\n");
             } else {
-                printf("Digite o número do filme que deseja buscar: ");
-                scanf("%d", &num_user);
-                while(getchar() != '\n');
-                printf("\n");
+                while (1) {
+                    printf("Digite o número do filme que deseja buscar (1 - %d): ", qtd_atual);
+                    if (scanf("%d", &num_user) != 1) {
+                        printf("Erro: Insira um número válido.\n\n");
+                        while(getchar() != '\n');
+                        continue;
+                    } break;
+                }
 
                 num_real = num_user - 1; // converte para o indice real do filme dentro do array
 
