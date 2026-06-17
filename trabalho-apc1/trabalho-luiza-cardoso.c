@@ -112,9 +112,9 @@ int main() {
                 char titulo_novo[51];
                 int ano_novo, estrelas_novo;
 
-                printf("Insira os dados do filme %d\n", num_user);
-                puts("Título:");
-                scanf("%50[^\n]s", &titulo_novo);
+                printf("Insira os dados do Filme %d\n", num_user);
+                printf("Título:\n");
+                scanf("%s", titulo_novo);
                 while(getchar() != '\n');
 
                 while (1) {
@@ -149,6 +149,7 @@ int main() {
                 printf("Título: %s\n", filmes[num_real].titulo);
                 printf("Ano: %d\n", filmes[num_real].ano);
                 printf("Estrelas: %d\n\n", filmes[num_real].estrelas);
+                printf("Filme editado com sucesso!\n\n");
                 }
             }
         } else if (opcao == 4) {
@@ -214,7 +215,7 @@ int main() {
     } while (opcao !=6);
 
     if (opcao == 6) {
-        printf("Encerrando. Até a próxima!\n");
+        printf("Encerrando. Até a próxima! (^o^)/\n");
     }
     
     return 0;
